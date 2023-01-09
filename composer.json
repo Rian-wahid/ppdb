@@ -1,0 +1,19 @@
+{
+    "name": "rian/ppdb",
+    "type": "project",
+    "require": {
+        "dompdf/dompdf": "^2.0",
+        "phpunit/phpunit": "^9.5"
+    },
+    "authors": [
+        {
+            "name": "Rian Wahid Prayogo",
+            "email": "r14n4r1e5@gmail.com"
+        }
+    ],
+    "autoload":{
+        "psr-4":{
+            "PPDB\\":"src/"
+        }
+    }
+}
