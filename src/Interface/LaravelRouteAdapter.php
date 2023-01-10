@@ -10,7 +10,6 @@ if (file_exists($maintenance = __DIR__.'/../../laravel/storage/framework/mainten
     require $maintenance;
 }
 
-require __DIR__.'/../../laravel/vendor/autoload.php';
 
 class LaravelRouteAdapter{
 
