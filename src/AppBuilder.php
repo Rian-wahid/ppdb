@@ -7,6 +7,7 @@ use PPDB\Repository\PdfRepositoryFile;
 use PPDB\Entities\NewStudentValidator;
 use PPDB\Entities\Fields;
 use PPDB\Interface\Web;
+use PPDB\Interface\LaravelRouteAdapter;
 class AppBuilder{
     static function build(Object $config){
         $fields=new Fields();
@@ -15,8 +16,10 @@ class AppBuilder{
         $new_student_validator = new NewStudentValidator($fields);
         $handler = new PPDBFormUseCase($html_template,$pdf_repo,$new_student_validator);
         $web = new Web($handler);
+        $laravel = new LaravelRouteAdapter($handler);
         return (object)[
-            "web"=>$web
+            "web"=>$web,
+            "laravel"=>$laravel,
         ];
     } 
     

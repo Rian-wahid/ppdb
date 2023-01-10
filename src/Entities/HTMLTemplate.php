@@ -96,13 +96,16 @@ class HTMLTemplate{
                     <?php foreach($this->fields as $field){?>
                         data["<?= $field["name"];?>"] =  formData.get("<?= $field["name"];?>")
                     <?php }?>
+                    data["_token"]="<?= csrf_token();?>"
                     const json = JSON.stringify(data)
                     
                     fetch(window.location.href,{
                         method:"POST",
                         headers:{
                             "'Content-Type":"application/json",
-                            "Content-Length":json.length
+                            "Accept":"application/json",
+                            "Content-Length":json.length,
+                            "X-CSRF-TOKEN":"<?= csrf_token();?>"
                         },
                         body:json
                     }).then(response=>{
@@ -148,6 +151,10 @@ class HTMLTemplate{
                    margin-bottom:12px;
                    padding:12px;
                 }
+                td{
+                    padding:6px;
+                    
+                }
               table{
                 font-size:16px;
                 border-collapse:collapse;
@@ -172,8 +179,8 @@ class HTMLTemplate{
                     $value = (array_key_exists("enum",$field))? $field["label_enum"][array_search($data[$field["name"]],$field["enum"])]:$data[$field["name"]];
                 ?>
                     <tr <?php if($i%2 == 1){?> style="background:#efefef;" <?php }?>>
-                        <td style="vertical-align: top; margin-left:12px; margin-right;40px;" ><?= $field["label"];?></td>
-                        <td style="vertical-align: top;" >:</td>
+                        <td style="vertical-align: top; width:200px;"><?= $field["label"];?></td>
+                        <td style="vertical-align: top; width:5px" >:</td>
                        
                         <td style="vertical-align: top;"><?= $value; ?></td>
                     </tr>
